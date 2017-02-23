@@ -43,9 +43,19 @@ public class Main {
 	public static void doSimulation(Structure structure) {
 		for (Endpoint endpoint : structure.endpoints) {
 			for (Video video : endpoint.videoRequests.keySet()) {
+				Integer bestTimeSaving = 0;
+				Cache bestCache = null;
 				for (Cache cache : endpoint.cachesLatency.keySet()) {
 					Integer timeSaving = TimeSavingCalculator.getTotalTimeSaving(endpoint, video, cache);
-					cache.insertPriorityQueueEntry(endpoint, video, timeSaving);
+					if (timeSaving > bestTimeSaving) {
+						if (bestCache != null) { // Remove video from old cache if existing
+							
+						}
+						bestTimeSaving = timeSaving;
+						bestCache = cache;
+						cache.insertPriorityQueueEntry(endpoint, video, timeSaving);
+					}
+					
 				}
 			}
 		}
