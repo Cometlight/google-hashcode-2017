@@ -10,7 +10,7 @@ import hash2017.model.Video;
 
 public class Main {
 	
-	public static final int NUMBER_OF_ITERATIONS = 0;
+	public static final int NUMBER_OF_ITERATIONS = 5;
 
 	public static void main(String[] args) throws IOException {
 		System.out.println("Team FH* Reloaded");
@@ -59,6 +59,9 @@ public class Main {
 		Integer bestTimeSaving = 0;
 		Cache bestCache = null;
 		for (Cache cache : endpoint.cachesLatency.keySet()) {
+			if (cacheToExclude != null && cache.id == cacheToExclude.id){
+				continue;
+			}
 			Integer timeSaving = TimeSavingCalculator.getTotalTimeSaving(endpoint, video, cache);
 			if (timeSaving > bestTimeSaving) {
 				if (bestCache != null) { // Remove video from old cache if existing

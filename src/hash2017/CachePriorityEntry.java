@@ -30,7 +30,6 @@ public class CachePriorityEntry {
 	
 	public void addToHashMap(Endpoint endpoint, Integer timeSaving) {
 		if (endpointTimeSavingMap.get(endpoint) != null) {
-			System.err.println("Endpoint " + endpoint.id + " already in hashmap!");
 			return;
 		}
 		endpointTimeSavingMap.put(endpoint, timeSaving);
@@ -40,7 +39,6 @@ public class CachePriorityEntry {
 	public void removeFromHashMap(Endpoint endpoint) {
 		Integer timeSavingOfRemovedEndpoint = endpointTimeSavingMap.remove(endpoint);	
 		if (timeSavingOfRemovedEndpoint == null) {
-			System.err.println("Endpoint " + endpoint + " does not exit in hashmap and can't be removed");
 			return;
 		}
 		totalTimeSavings -= timeSavingOfRemovedEndpoint;
