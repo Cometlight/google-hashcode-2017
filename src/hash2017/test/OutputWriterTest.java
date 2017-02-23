@@ -45,7 +45,7 @@ public class OutputWriterTest {
 		
 		OutputWriter.writeOutput(structure);
 		
-		String expected = "3\n0 2\n1 3 1\n2 0 1";
+		String expected = "3\n0 2\n1 3 1\n2 0 1\n";
 		
 		assertEquals("check output", expected, outContent.toString());
 	}
