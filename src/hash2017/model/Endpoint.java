@@ -8,9 +8,8 @@ public class Endpoint {
 	public HashMap<Cache, Integer> cachesLatency;
 	public HashMap<Video, Integer> videoRequests;
 
-	public Endpoint(int id, int datacenterLatency) {
+	public Endpoint(int id) {
 		this.id = id;
-		this.datacenterLatency = datacenterLatency;
 	}
 
 }
