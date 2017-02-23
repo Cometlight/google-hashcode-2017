@@ -24,7 +24,7 @@ public class AssignmentParser {
 		List<Integer> dims = GetTokens(content.get(0));
 		int videosCount = dims.get(0);
 		int endpointCount = dims.get(1);
-		int requestDescriptions = dims.get(2);
+		int requestCount = dims.get(2);
 		int cachesCount = dims.get(3);
 		int cacheSize = dims.get(4);
 		
@@ -55,24 +55,36 @@ public class AssignmentParser {
 	    
 		// latenzy
 	    int endpointCurrentId = 0;
-		for(int i = 3; i < content.size(); ++i) {
+		for(int i = 2; i < content.size(); ++i) {
 			// endpoint to cache descriptor
 			List<Integer> cacheDescriptor = GetTokens(content.get(i));
 			Integer dataCenterLatenzy = cacheDescriptor.get(0);
 			Integer connectioncount = cacheDescriptor.get(1);
 			
+			System.out.println(endpointCurrentId);
 			Endpoint endPoint = structure.endpoints[endpointCurrentId];
 			endPoint.datacenterLatency = dataCenterLatenzy;
 			
-			int endOfDescriptionOffset = i + connectioncount; 
-			for(int j = i; j <= endOfDescriptionOffset; ++j) {
-				
-			}
-				
+			i++;
+			int endOfDescriptionOffset = i + connectioncount - 1; 
 			
-			i++; // get to next endpoint descriptor
+			for(int j = i; j < endOfDescriptionOffset; ++j) {
+				List<Integer> latencyDescription = GetTokens(content.get(j));
+				Integer cacheId = latencyDescription.get(0);
+				Integer latenzy = latencyDescription.get(1);
+				
+				Cache cache = structure.caches[cacheId];
+				endPoint.cachesLatency.put(cache, latenzy);
+
+				i = j;
+			}	
+			i++;
 			endpointCurrentId++;
 		}
+		
+		// request
+		//for(int i = 0; i < )
+		
 		return structure;
 	}
 
