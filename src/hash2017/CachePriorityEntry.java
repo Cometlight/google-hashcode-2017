@@ -9,6 +9,7 @@ public class CachePriorityEntry {
 	private Video video;
 	private HashMap<Endpoint, Integer> endpointTimeSavingMap;
 	
+	private Integer totalTimeSavings = 0;
 	
 	public Video getVideo() {
 		return video;
@@ -22,7 +23,25 @@ public class CachePriorityEntry {
 		return endpointTimeSavingMap;
 	}
 	
-	public void setEndpointTimeSavingMap(HashMap<Endpoint, Integer> endpointTimeSavingMap) {
-		this.endpointTimeSavingMap = endpointTimeSavingMap;
+	public void addToHashMap(Endpoint endpoint, Integer timeSaving) {
+		if (endpointTimeSavingMap.get(endpoint) != null) {
+			System.err.println("Endpoint " + endpoint + " already in hashmap!");
+			return;
+		}
+		endpointTimeSavingMap.put(endpoint, timeSaving);
+		totalTimeSavings += timeSaving;
+	}
+	
+	public void removeFromHashMap(Endpoint endpoint) {
+		Integer timeSavingOfRemovedEndpoint = endpointTimeSavingMap.remove(endpoint);	
+		if (timeSavingOfRemovedEndpoint == null) {
+			System.err.println("Endpoint " + endpoint + " does not exit in hashmap and can't be removed");
+			return;
+		}
+		totalTimeSavings -= timeSavingOfRemovedEndpoint;
+	}
+	
+	public Integer getTotalTimeSavings() {	
+		return totalTimeSavings;
 	}
 }
