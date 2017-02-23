@@ -11,6 +11,11 @@ public class CachePriorityEntry {
 	
 	private Integer totalTimeSavings = 0;
 	
+	public CachePriorityEntry(Video video) {
+		this.video = video;
+		endpointTimeSavingMap = new HashMap<>();
+	}
+	
 	public Video getVideo() {
 		return video;
 	}
@@ -25,7 +30,7 @@ public class CachePriorityEntry {
 	
 	public void addToHashMap(Endpoint endpoint, Integer timeSaving) {
 		if (endpointTimeSavingMap.get(endpoint) != null) {
-			System.err.println("Endpoint " + endpoint + " already in hashmap!");
+			System.err.println("Endpoint " + endpoint.id + " already in hashmap!");
 			return;
 		}
 		endpointTimeSavingMap.put(endpoint, timeSaving);

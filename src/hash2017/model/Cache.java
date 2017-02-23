@@ -39,6 +39,11 @@ public class Cache {
 				return;
 			}
 		}
+		
+		// Entry doesn't exist yet
+		CachePriorityEntry newEntry = new CachePriorityEntry(video);
+		newEntry.addToHashMap(endpoint, timeSaving);
+		priorityQueue.add(newEntry);
 	}
 	
 	public void removeFromPriorityQueue(Endpoint endpoint, Video video) {
