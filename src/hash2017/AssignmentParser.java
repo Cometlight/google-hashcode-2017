@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
 
+import hash2017.model.Cache;
 import hash2017.model.Endpoint;
 import hash2017.model.Structure;
 import hash2017.model.Video;
@@ -24,8 +25,10 @@ public class AssignmentParser {
 		int videosCount = dims.get(0);
 		int endpointCount = dims.get(1);
 		int requestDescriptions = dims.get(2);
-		int caches = dims.get(3);
+		int cachesCount = dims.get(3);
 		int cacheSize = dims.get(4);
+		
+		Structure structure = new Structure();
 	
 		// videos
 		Video[] videos = new Video[videosCount];
@@ -33,10 +36,28 @@ public class AssignmentParser {
 		for(int i = 0; i < videosCount; ++i){
 			videos[i] = new Video(i, videoSizes.get(i));
 		}
+		structure.videos = videos;
 		
+		// endpoints
 		Endpoint[] endpoints = new Endpoint[endpointCount];  
+		for(int i = 0; i < endpointCount; ++i) {
+			endpoints[i] = new Endpoint(i);
+		}
+		structure.endpoints = endpoints;
 		
-		return new Structure(null,null,videos);
+		// caches
+	    Cache[] caches = new Cache[cachesCount];
+	    for (int i = 0; i < videosCount; ++i) {
+	      caches[i] = new Cache(i, cacheSize);
+	    }
+	    structure.caches = caches;
+	    
+		// latenzy
+		for(int i = 3; i < content.size(); ++i) {
+			
+		}
+		
+		return structure;
 	}
 	
 	public static List<Integer> GetTokens(String line) {
