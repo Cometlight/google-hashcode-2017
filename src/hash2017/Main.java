@@ -7,10 +7,13 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		System.out.println("Team FH* Reloaded");
+		String current = new java.io.File( "." ).getCanonicalPath();
+		System.out.printf(current + "\n");
 		String[] fileNames = {
-				"file1.in", 
-				"file2.in",
-				"file3.in"
+				"kittens.in", 
+				"me_at_the_zoo.in",
+				"trending_today.in",
+				"videos_worth_spreading.in"
 			};
 		
 		for (String fileName : fileNames) {
@@ -20,6 +23,10 @@ public class Main {
 	}
 	
 	public static void solveTaskUsingInput(File file) throws IOException {
+		if(!file.exists())
+		{
+			throw new IOException();
+		}
 		AssignmentParser.parseFile(file);
 	}
 

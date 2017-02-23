@@ -5,6 +5,6 @@ import java.io.IOException;
 
 public class AssignmentParser {
 	public static void parseFile(File file) throws IOException {
-		
+		System.out.print(file.getName() + "\n");
 	}
 }
