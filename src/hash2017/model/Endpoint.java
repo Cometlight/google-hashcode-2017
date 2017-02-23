@@ -5,7 +5,8 @@ import java.util.HashMap;
 public class Endpoint {
 	public int id;
 	public int datacenterLatency;
-	public HashMap<Integer, Integer> cachesLatency;
+	public HashMap<Cache, Integer> cachesLatency;
+	public HashMap<Video, Integer> videoRequests;
 
 	public Endpoint(int id, int datacenterLatency) {
 		this.id = id;
