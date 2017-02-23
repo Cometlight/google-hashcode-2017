@@ -29,5 +29,14 @@ public class Cache {
 		}
 		return 0;
 	}
+	
+	public void insertPriorityQueueEntry(Endpoint endpoint, Video video, Integer timeSaving) {
+		for (CachePriorityEntry entry : priorityQueue) {
+			if (entry.getVideo().id == video.id) {
+				entry.addToHashMap(endpoint, timeSaving);
+				return;
+			}
+		}
+	}
 
 }

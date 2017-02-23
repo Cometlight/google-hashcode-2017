@@ -27,7 +27,9 @@ public class AssignmentParser {
 		int requestDescriptions = dims.get(2);
 		int cachesCount = dims.get(3);
 		int cacheSize = dims.get(4);
-
+		
+		Structure structure = new Structure();
+	
 		// videos
 		Video[] videos = new Video[videosCount];
 		List<Integer> videoSizes = GetTokens(content.get(1));
@@ -35,15 +37,28 @@ public class AssignmentParser {
 			videos[i] = new Video(i, videoSizes.get(i));
 		}
 
-		// caches
-		Cache[] caches = new Cache[cachesCount];
-		for (int i = 0; i < cachesCount; ++i) {
-			caches[i] = new Cache(i, cacheSize);
+		structure.videos = videos;
+		
+		// endpoints
+		Endpoint[] endpoints = new Endpoint[endpointCount];  
+		for(int i = 0; i < endpointCount; ++i) {
+			endpoints[i] = new Endpoint(i);
 		}
-
-		Endpoint[] endpoints = new Endpoint[endpointCount];
-
-		return new Structure(caches, null, videos);
+		structure.endpoints = endpoints;
+		
+		// caches
+	    Cache[] caches = new Cache[cachesCount];
+	    for (int i = 0; i < videosCount; ++i) {
+	      caches[i] = new Cache(i, cacheSize);
+	    }
+	    structure.caches = caches;
+	    
+		// latenzy
+		for(int i = 3; i < content.size(); ++i) {
+			
+		}
+		
+		return structure;
 	}
 
 	public static List<Integer> GetTokens(String line) {
