@@ -44,6 +44,7 @@ public class Main {
 	
 	public static void doSimulation(Structure structure) {
 		for (Endpoint endpoint : structure.endpoints) {
+			System.out.println("Working on endpoint " + endpoint.id + " of " + structure.endpoints.length);
 			for (Video video : endpoint.videoRequests.keySet()) {
 				insertInBestCache(endpoint, video, null);
 			}
