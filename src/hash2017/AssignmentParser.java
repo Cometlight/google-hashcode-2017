@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
 
+import hash2017.model.Endpoint;
 import hash2017.model.Structure;
 import hash2017.model.Video;
 
@@ -33,6 +34,7 @@ public class AssignmentParser {
 			videos[i] = new Video(i, videoSizes.get(i));
 		}
 		
+		Endpoint[] endpoints = new Endpoint[endpointCount];  
 		
 		return new Structure(null,null,videos);
 	}
