@@ -35,7 +35,8 @@ public class Main {
 		{
 			throw new IOException();
 		}
-		AssignmentParser.parseFile(file);
+		Structure structure = AssignmentParser.parseFile(file);
+		doSimulation(structure);
 	}
 	
 	public static void doSimulation(Structure structure) {
@@ -49,6 +50,9 @@ public class Main {
 		for (int i = 0; i < NUMBER_OF_ITERATIONS; ++i) {
 			optimizeCacheContents(structure);
 		}
+		System.out.println("-----BEGIN---------------------------");
+		OutputWriter.writeOutput(structure);
+		System.out.println("-----END---------------------------");
 	}
 
 	private static void insertInBestCache(Endpoint endpoint, Video video, Cache cacheToExclude /*may be null*/) {

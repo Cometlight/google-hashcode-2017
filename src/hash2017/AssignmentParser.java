@@ -74,7 +74,6 @@ public class AssignmentParser {
 					Integer cacheId = latencyDescription.get(0);
 					Integer latenzy = latencyDescription.get(1);
 					
-					System.out.println(cacheId);
 					Cache cache = structure.caches[cacheId];
 					endPoint.cachesLatency.put(cache, latenzy);
 	
