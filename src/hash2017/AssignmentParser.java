@@ -15,12 +15,12 @@ import hash2017.model.Video;
 public class AssignmentParser {
 	public static Structure parseFile(File file) throws IOException {
 		System.out.print(file.getName() + "\n");
-		
-		//pares into tokens
+
+		// pares into tokens
 		Charset charset = Charset.forName("US-ASCII");
-		List<String> content = Files.readAllLines(file.toPath(),charset );
-		
-		//parse dims
+		List<String> content = Files.readAllLines(file.toPath(), charset);
+
+		// parse dims
 		List<Integer> dims = GetTokens(content.get(0));
 		int videosCount = dims.get(0);
 		int endpointCount = dims.get(1);
@@ -33,9 +33,10 @@ public class AssignmentParser {
 		// videos
 		Video[] videos = new Video[videosCount];
 		List<Integer> videoSizes = GetTokens(content.get(1));
-		for(int i = 0; i < videosCount; ++i){
+		for (int i = 0; i < videosCount; ++i) {
 			videos[i] = new Video(i, videoSizes.get(i));
 		}
+
 		structure.videos = videos;
 		
 		// endpoints
@@ -74,18 +75,18 @@ public class AssignmentParser {
 		}
 		return structure;
 	}
-	
+
 	public static List<Integer> GetTokens(String line) {
 		String[] split = line.split("\\s+");
-	
+
 		List<Integer> result = new LinkedList<Integer>();
-		
-		for(int i = 0; i < split.length; ++i) {
+
+		for (int i = 0; i < split.length; ++i) {
 			result.add(Integer.parseInt(split[i]));
 		}
-		
+
 		return result;
-		
+
 	}
-	
+
 }
