@@ -1,9 +1,12 @@
 package hash2017.model;
 
 public class Endpoint {
+	public int id;
+	public int datacenterLatency;
 
-	public Endpoint() {
-		// TODO Auto-generated constructor stub
+	public Endpoint(int id, int datacenterLatency) {
+		this.id = id;
+		this.datacenterLatency = datacenterLatency;
 	}
 
 }
