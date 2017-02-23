@@ -55,13 +55,13 @@ public class AssignmentParser {
 	    
 		// latenzy
 	    int endpointCurrentId = 0;
-		for(int i = 2; i < content.size(); ++i) {
+	    int endpointDescriptionEndOffset = content.size() - requestCount;
+	    for(int i = 2; i < endpointDescriptionEndOffset	; ++i) {
 			// endpoint to cache descriptor
 			List<Integer> cacheDescriptor = GetTokens(content.get(i));
 			Integer dataCenterLatenzy = cacheDescriptor.get(0);
 			Integer connectioncount = cacheDescriptor.get(1);
 			
-			System.out.println(endpointCurrentId);
 			Endpoint endPoint = structure.endpoints[endpointCurrentId];
 			endPoint.datacenterLatency = dataCenterLatenzy;
 			
@@ -82,8 +82,18 @@ public class AssignmentParser {
 			endpointCurrentId++;
 		}
 		
-		// request
-		//for(int i = 0; i < )
+	    for(int i = endpointDescriptionEndOffset +1; i < content.size(); ++i) {
+	    	List<Integer> requestDescription = GetTokens(content.get(i));
+	    	
+	    	int videoId = requestDescription.get(0);
+	    	int endpointId = requestDescription.get(1);
+	    	int requests = requestDescription.get(2);
+	    	
+	    	Endpoint endpoint = structure.endpoints[endpointId];
+	    	Video video = structure.videos[videoId];
+	    	
+	    	endpoint.videoRequests.put(video, requests);
+	    }
 		
 		return structure;
 	}
