@@ -8,8 +8,8 @@ import java.util.PriorityQueue;
 import hash2017.CachePriorityEntry;
 
 public class Cache {
-	private Integer id;
-	private Integer capacity; // in MB
+	public Integer id;
+	public Integer capacity; // in MB
 	private PriorityQueue<CachePriorityEntry> priorityQueue;
 
 	public Cache(Integer id, Integer capacity) {

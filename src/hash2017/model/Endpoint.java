@@ -9,6 +9,9 @@ public class Endpoint {
 	public HashMap<Video, Integer> videoRequests;
 
 	public Endpoint(int id) {
+		cachesLatency = new HashMap<>();
+		videoRequests = new HashMap<>();
+		
 		this.id = id;
 	}
 
