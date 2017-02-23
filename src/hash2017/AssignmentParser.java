@@ -47,16 +47,31 @@ public class AssignmentParser {
 		
 		// caches
 	    Cache[] caches = new Cache[cachesCount];
-	    for (int i = 0; i < videosCount; ++i) {
+	    for (int i = 0; i < cachesCount; ++i) {
 	      caches[i] = new Cache(i, cacheSize);
 	    }
 	    structure.caches = caches;
 	    
 		// latenzy
+	    int endpointCurrentId = 0;
 		for(int i = 3; i < content.size(); ++i) {
+			// endpoint to cache descriptor
+			List<Integer> cacheDescriptor = GetTokens(content.get(i));
+			Integer dataCenterLatenzy = cacheDescriptor.get(0);
+			Integer connectioncount = cacheDescriptor.get(1);
 			
+			Endpoint endPoint = structure.endpoints[endpointCurrentId];
+			endPoint.datacenterLatency = dataCenterLatenzy;
+			
+			int endOfDescriptionOffset = i + connectioncount; 
+			for(int j = i; j <= endOfDescriptionOffset; ++j) {
+				
+			}
+				
+			
+			i++; // get to next endpoint descriptor
+			endpointCurrentId++;
 		}
-		
 		return structure;
 	}
 	
