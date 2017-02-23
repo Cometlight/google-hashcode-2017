@@ -1,6 +1,8 @@
 package hash2017.model;
 
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.PriorityQueue;
 
 import hash2017.CachePriorityEntry;
@@ -37,6 +39,42 @@ public class Cache {
 				return;
 			}
 		}
+	}
+	
+	public void removeFromPriorityQueue(Endpoint endpoint, Video video) {
+		for (CachePriorityEntry entry : priorityQueue) {
+			if (entry.getVideo().id == video.id) {
+				entry.removeFromHashMap(endpoint);
+				return;
+			}
+		}
+	}
+	
+	public List<Video> getStoredVideos() {
+		List<Video> videos = new LinkedList<>();
+		Integer curSize = 0;
+		for (CachePriorityEntry entry : priorityQueue) {
+			if (curSize + entry.getVideo().size <= this.capacity) {
+				curSize += entry.getVideo().size;
+				videos.add(entry.getVideo());
+			}
+		}
+		
+		return videos;
+	}
+	
+	public List<CachePriorityEntry> getVideosOutOfMemory() {
+		List<CachePriorityEntry> outOfMemoryVideos = new LinkedList<>();
+		Integer curSize = 0;
+		for (CachePriorityEntry entry : priorityQueue) {
+			if (curSize + entry.getVideo().size > this.capacity) {
+				outOfMemoryVideos.add(entry);
+			} else {
+				curSize += entry.getVideo().size;
+			}
+		}
+		
+		return outOfMemoryVideos;
 	}
 
 }

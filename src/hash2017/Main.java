@@ -9,6 +9,8 @@ import hash2017.model.Structure;
 import hash2017.model.Video;
 
 public class Main {
+	
+	public static final int NUMBER_OF_ITERATIONS = 0;
 
 	public static void main(String[] args) throws IOException {
 		System.out.println("Team FH* Reloaded");
@@ -42,10 +44,39 @@ public class Main {
 	
 	public static void doSimulation(Structure structure) {
 		for (Endpoint endpoint : structure.endpoints) {
+			System.out.println("Working on endpoint " + endpoint.id + " of " + structure.endpoints.length);
 			for (Video video : endpoint.videoRequests.keySet()) {
-				for (Cache cache : endpoint.cachesLatency.keySet()) {
-					Integer timeSaving = TimeSavingCalculator.getTotalTimeSaving(endpoint, video, cache);
-					cache.insertPriorityQueueEntry(endpoint, video, timeSaving);
+				insertInBestCache(endpoint, video, null);
+			}
+		}
+		
+		for (int i = 0; i < NUMBER_OF_ITERATIONS; ++i) {
+			optimizeCacheContents(structure);
+		}
+	}
+
+	private static void insertInBestCache(Endpoint endpoint, Video video, Cache cacheToExclude /*may be null*/) {
+		Integer bestTimeSaving = 0;
+		Cache bestCache = null;
+		for (Cache cache : endpoint.cachesLatency.keySet()) {
+			Integer timeSaving = TimeSavingCalculator.getTotalTimeSaving(endpoint, video, cache);
+			if (timeSaving > bestTimeSaving) {
+				if (bestCache != null) { // Remove video from old cache if existing
+					bestCache.removeFromPriorityQueue(endpoint, video);
+				}
+				bestTimeSaving = timeSaving;
+				bestCache = cache;
+				cache.insertPriorityQueueEntry(endpoint, video, timeSaving);
+			}
+		}
+	}
+	
+	public static void optimizeCacheContents(Structure structure) {
+		for (Cache cache : structure.caches) {
+			for (CachePriorityEntry outOfMemoryEntry : cache.getVideosOutOfMemory()) {
+				for (Endpoint endpoint : outOfMemoryEntry.getEndpointTimeSavingMap().keySet()) {
+					Video video = outOfMemoryEntry.getVideo();
+					insertInBestCache(endpoint, video, cache);
 				}
 			}
 		}
