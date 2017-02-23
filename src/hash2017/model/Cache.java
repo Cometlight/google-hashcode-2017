@@ -41,6 +41,15 @@ public class Cache {
 		}
 	}
 	
+	public void removeFromPriorityQueue(Endpoint endpoint, Video video) {
+		for (CachePriorityEntry entry : priorityQueue) {
+			if (entry.getVideo().id == video.id) {
+				entry.removeFromHashMap(endpoint);
+				return;
+			}
+		}
+	}
+	
 	public List<Video> getStoredVideos() {
 		List<Video> videos = new LinkedList<>();
 		Integer curSize = 0;

@@ -49,13 +49,12 @@ public class Main {
 					Integer timeSaving = TimeSavingCalculator.getTotalTimeSaving(endpoint, video, cache);
 					if (timeSaving > bestTimeSaving) {
 						if (bestCache != null) { // Remove video from old cache if existing
-							
+							bestCache.removeFromPriorityQueue(endpoint, video);
 						}
 						bestTimeSaving = timeSaving;
 						bestCache = cache;
 						cache.insertPriorityQueueEntry(endpoint, video, timeSaving);
 					}
-					
 				}
 			}
 		}
