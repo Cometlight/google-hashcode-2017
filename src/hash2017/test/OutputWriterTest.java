@@ -1,5 +1,12 @@
 package hash2017.test;
 
+import static org.junit.Assert.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import hash2017.OutputWriter;
@@ -9,7 +16,13 @@ import hash2017.model.Structure;
 import hash2017.model.Video;
 
 public class OutputWriterTest {
+	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
+	@Before
+	public void setUpStreams() {
+	    System.setOut(new PrintStream(outContent));
+	}
+	
 	@Test
 	public void test() {
 		Cache[] caches = new Cache[3];
@@ -31,6 +44,15 @@ public class OutputWriterTest {
 		structure.caches = caches;
 		
 		OutputWriter.writeOutput(structure);
+		
+		String expected = "3\n0 2\n1 3 1\n2 0 1";
+		
+		assertEquals("check output", expected, outContent.toString());
+	}
+	
+	@After
+	public void cleanUpStreams() {
+	    System.setOut(null);
 	}
 
 }

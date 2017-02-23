@@ -17,9 +17,9 @@ public class OutputWriter {
 	}
 
 	private static String cacheOutput(Cache cache) {
-		StringBuilder output = new StringBuilder(cache.id + " ");
+		StringBuilder output = new StringBuilder(cache.id);
 		for(Video video : cache.getStoredVideos()){
-			output.append(video.id + " ");
+			output.append(" " + video.id);
 		}
 		return output.toString();
 	}
