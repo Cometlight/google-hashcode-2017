@@ -29,8 +29,8 @@ public class OutputWriterTest {
 		Endpoint endpoint = new Endpoint(0);
 		Video video0 = new Video(0,100);
 		Video video1 = new Video(1,100);
-		Video video2 = new Video(0,100);
-		Video video3 = new Video(1,100);
+		Video video2 = new Video(2,100);
+		Video video3 = new Video(3,100);
 		caches[0] = new Cache(0,500);
 		caches[1] = new Cache(1,500);
 		caches[2] = new Cache(2,500);
