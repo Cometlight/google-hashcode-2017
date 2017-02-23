@@ -14,7 +14,7 @@ import hash2017.model.Structure;
 public class AssignmentParserTest {
 
 	@Test
-	public void test() throws IOException {
+	public void kitten() throws IOException {
 		Structure testStructure = AssignmentParser.parseFile(new File("kittens.in"));
 		assertNotNull("structure not null", testStructure);
 		assertTrue("caches exist", testStructure.caches.length > 0);
@@ -32,7 +32,7 @@ public class AssignmentParserTest {
 	}
 	
 	@Test
-	public void test1() throws IOException {
+	public void meAtTheZoo() throws IOException {
 		Structure testStructure = AssignmentParser.parseFile(new File("me_at_the_zoo.in"));
 		assertNotNull("structure not null", testStructure);
 		assertTrue("caches exist", testStructure.caches.length > 0);
@@ -44,7 +44,7 @@ public class AssignmentParserTest {
 	}
 	
 	@Test
-	public void test2() throws IOException {
+	public void trendingToday() throws IOException {
 		Structure testStructure = AssignmentParser.parseFile(new File("trending_today.in"));
 		assertNotNull("structure not null", testStructure);
 		assertTrue("caches exist", testStructure.caches.length > 0);
@@ -56,7 +56,7 @@ public class AssignmentParserTest {
 	}
 	
 	@Test
-	public void test3() throws IOException {
+	public void VideosWorthSpreading() throws IOException {
 		Structure testStructure = AssignmentParser.parseFile(new File("videos_worth_spreading.in"));
 		assertNotNull("structure not null", testStructure);
 		assertTrue("caches exist", testStructure.caches.length > 0);
