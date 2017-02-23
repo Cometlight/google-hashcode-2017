@@ -66,7 +66,6 @@ public class AssignmentParser {
 			endPoint.datacenterLatency = dataCenterLatenzy;
 			
 			if (connectioncount > 0) {
-				System.out.println("Cur. endpoint: " + endpointCurrentId + ", line: " + i);
 				int endOfDescriptionOffset = i + connectioncount; 
 				i++;
 				
