@@ -1,6 +1,8 @@
 package hash2017.model;
 
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.PriorityQueue;
 
 import hash2017.CachePriorityEntry;
@@ -37,6 +39,20 @@ public class Cache {
 				return;
 			}
 		}
+	}
+	
+	public List<Video> getStoredVideos() {
+		List<Video> videos = new LinkedList<>();
+		Integer curSize = 0;
+		for (CachePriorityEntry entry : priorityQueue) {
+			if (curSize + entry.getVideo().size > this.capacity) {
+				break;
+			}
+			curSize += entry.getVideo().size;
+			videos.add(entry.getVideo());
+		}
+		
+		return videos;
 	}
 
 }
