@@ -54,13 +54,27 @@ public class Cache {
 		List<Video> videos = new LinkedList<>();
 		Integer curSize = 0;
 		for (CachePriorityEntry entry : priorityQueue) {
-			if (curSize + entry.getVideo().size > this.capacity) {
-				break;
+			if (curSize + entry.getVideo().size <= this.capacity) {
+				curSize += entry.getVideo().size;
+				videos.add(entry.getVideo());
 			}
-			curSize += entry.getVideo().size;
-			videos.add(entry.getVideo());
 		}
 		
 		return videos;
 	}
+	
+	public List<CachePriorityEntry> getVideosOutOfMemory() {
+		List<CachePriorityEntry> outOfMemoryVideos = new LinkedList<>();
+		Integer curSize = 0;
+		for (CachePriorityEntry entry : priorityQueue) {
+			if (curSize + entry.getVideo().size > this.capacity) {
+				outOfMemoryVideos.add(entry);
+			} else {
+				curSize += entry.getVideo().size;
+			}
+		}
+		
+		return outOfMemoryVideos;
+	}
+
 }
