@@ -16,10 +16,10 @@ public class AssignmentParserTest {
 		Structure testStructure = AssignmentParser.parseFile(new File("kittens.in"));
 		assertNotNull("structure not null", testStructure);
 		assertTrue("caches exist", testStructure.caches.length > 0);
-		//assertTrue("endpoints exist", testStructure.endpoints.length > 0);
+		assertTrue("endpoints exist", testStructure.endpoints.length > 0);
 		assertTrue("videos exist", testStructure.videos.length > 0);
 		assertTrue("all caches loaded", testStructure.caches[testStructure.caches.length-1].capacity > 0);
-		//assertTrue("all endpoints loaded", testStructure.endpoints[testStructure.endpoints.length-1].datacenterLatency > 0);
+		assertTrue("all endpoints loaded", testStructure.endpoints[testStructure.endpoints.length-1].datacenterLatency > 0);
 		assertTrue("all videos loaded", testStructure.videos[testStructure.videos.length-1].size > 0);
 	}
 
