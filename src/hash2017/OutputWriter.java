@@ -1,5 +1,8 @@
 package hash2017;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +17,16 @@ public class OutputWriter {
 		List<Cache> caches = Arrays.asList(structure.caches).stream().filter(cache -> !cache.getStoredVideos().isEmpty()).collect(Collectors.toList());
 		System.out.println(caches.size());
 		caches.stream().forEach(cache -> System.out.println(cacheOutput(cache)));
+	}
+	
+	public static void writeOutputToFile(Structure structure, String filename) {
+		List<Cache> caches = Arrays.asList(structure.caches).stream().filter(cache -> !cache.getStoredVideos().isEmpty()).collect(Collectors.toList());
+		try (PrintWriter writer = new PrintWriter(filename)) {
+			writer.println(caches.size());
+			caches.stream().forEach(cache -> writer.println(cacheOutput(cache)));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static String cacheOutput(Cache cache) {
