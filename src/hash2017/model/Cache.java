@@ -18,7 +18,7 @@ public class Cache {
 		priorityQueue = new PriorityQueue<>(new Comparator<CachePriorityEntry>() {
 			@Override
 			public int compare(CachePriorityEntry entry1, CachePriorityEntry entry2) {
-				return entry1.getTotalTimeSavings() - entry2.getTotalTimeSavings(); // TODO maybe reverse if wrong
+				return entry2.getTotalTimeSavings()/entry2.getVideo().size - entry1.getTotalTimeSavings()/entry1.getVideo().size; // TODO maybe reverse if wrong
 			}
 		});
 	}
